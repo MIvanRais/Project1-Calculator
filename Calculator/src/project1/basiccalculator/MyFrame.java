@@ -1,5 +1,7 @@
+//**The file in project1.basiccalculator package */
 package project1.basiccalculator;
 
+//**Import from library Java */
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -13,7 +15,7 @@ import java.awt.GridLayout;
 import java.lang.StringBuilder;
 
 public class MyFrame extends JFrame implements MouseListener {
-    // Declare in MyFrame1 scope
+    // **Declare in MyFrame scope */
     char operator;
     String value;
     int num1, num2, result;
@@ -31,55 +33,50 @@ public class MyFrame extends JFrame implements MouseListener {
 
     Font myFont = new Font(null, Font.PLAIN, 18);
 
+    // **Constructor of MyFrame */
     MyFrame() {
+        // **Create a frame */
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Standard");
         this.setSize(350, 635);
         this.setResizable(false);
         this.setLayout(null);
 
-        // create the comboBox
+        // **Create the comboBox */
         comboBox = new JComboBox(option);
         comboBox.setBounds(25, 20, 300, 20);
         comboBox.setFocusable(false);
 
-        // create the labelFormulaLeft
+        // **Create the labelFormulaLeft */
         labelFormulaLeft = new JLabel();
-        // labelFormulaLeft.setBackground(Color.BLACK);
-        // labelFormulaLeft.setOpaque(true);
         labelFormulaLeft.setBounds(25, 125, 150, 30);
         labelFormulaLeft.setFont(new Font(null, Font.BOLD, 20));
 
-        // create the labelFormulaRightL
+        // **Create the labelFormulaRightL */
         labelFormulaRightL = new JLabel();
-        // labelFormulaRightL.setBackground(Color.blue);
-        // labelFormulaRightL.setOpaque(true);
         labelFormulaRightL.setBounds(175, 125, 75, 30);
         labelFormulaRightL.setFont(new Font(null, Font.BOLD, 20));
         labelFormulaRightL.setHorizontalAlignment(JLabel.LEFT);
 
-        // create the labelFormulaRightR
+        // **Create the labelFormulaRightR */
         labelFormulaRightR = new JLabel();
-        // labelFormulaRightR.setBackground(Color.GREEN);
-        // labelFormulaRightR.setOpaque(true);
         labelFormulaRightR.setBounds(250, 125, 75, 30);
         labelFormulaRightR.setFont(new Font(null, Font.BOLD, 20));
         labelFormulaRightR.setHorizontalAlignment(JLabel.RIGHT);
 
-        // create the textFieldInput
+        // **Create the textFieldInput *
         textFieldInput = new JTextField();
         textFieldInput.setBounds(25, 170, 300, 40);
         textFieldInput.setFont(new Font(null, Font.BOLD, 20));
         textFieldInput.setEditable(false);
 
-        // create the panelSouth
+        // **Create the panelSouth */
         panelSouth = new JPanel();
         panelSouth.setBounds(25, 220, 300, 350);
-        // panelSouth.setBackground(Color.DARK_GRAY);
         panelSouth.setOpaque(true);
-        panelSouth.setLayout(new GridLayout(5, 4, 10, 10)); // rows, columns, hgap, vgap
+        panelSouth.setLayout(new GridLayout(5, 4, 10, 10));
 
-        // create fucntionButtons
+        // **Create fucntionButtons */
         addButton = new JButton("+");
         subButton = new JButton("-");
         mulButton = new JButton("*");
@@ -104,7 +101,7 @@ public class MyFrame extends JFrame implements MouseListener {
             functionButtons[init].setFocusable(false);
         }
 
-        // create a numberButtons
+        // **Create a numberButtons */
         for (int init = 0; init < 10; init++) {
             numberButtons[init] = new JButton(String.valueOf(init));
             numberButtons[init].addMouseListener(this);
@@ -112,7 +109,7 @@ public class MyFrame extends JFrame implements MouseListener {
             numberButtons[init].setFont(myFont);
         }
 
-        // add components to panelSouth
+        // **Add components to panelSouth */
         panelSouth.add(clrButton);
         panelSouth.add(delButton);
         panelSouth.add(expoButton);
@@ -131,10 +128,10 @@ public class MyFrame extends JFrame implements MouseListener {
         panelSouth.add(addButton);
         panelSouth.add(numberButtons[0]);
 
-        // create the equButton
+        // **Create the equButton */
         equButton.setBounds(103, 508, 220, 63);
 
-        // add components to frame
+        // **Add components to frame */
         this.add(equButton);
         this.add(panelSouth);
         this.add(textFieldInput);
@@ -147,53 +144,48 @@ public class MyFrame extends JFrame implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        // Invoked when the mouse button has been clicked (pressed and released) on a
-        // component
+        // **Invoked when the mouse button has been clicked (pressed and released) on a
+        // component */
         for (int init = 0; init < 10; init++) {
             if (e.getSource() == numberButtons[init]) {
+
                 textFieldInput.setText(textFieldInput.getText().concat(String.valueOf(init)));
             }
         }
         for (int init = 0; init < 8; init++) {
             if (e.getSource() == functionButtons[init]) {
+                // **When I click a functionButtons, it will appear in textFieldInput */
                 if (functionButtons[init] == functionButtons[0]) {
-                    // addButton
+                    // **addButton */
                     num1 = Integer.parseInt(textFieldInput.getText());
                     operator = '+';
                     textFieldInput.setText("");
-                    // textFieldInput.setText(textFieldInput.getText().concat(String.valueOf(operator)));
                 }
                 if (functionButtons[init] == functionButtons[1]) {
-                    // subButton
+                    // **subButton */
                     num1 = Integer.parseInt(textFieldInput.getText());
                     operator = '-';
                     textFieldInput.setText("");
-                    // textFieldInput.setText(textFieldInput.getText().concat(String.valueOf(operator)));
                 }
                 if (functionButtons[init] == functionButtons[2]) {
-                    // mulButton
+                    // **mulButton */
                     num1 = Integer.parseInt(textFieldInput.getText());
                     operator = '*';
                     textFieldInput.setText("");
-                    // textFieldInput.setText(textFieldInput.getText().concat(String.valueOf(operator)));
                 }
                 if (functionButtons[init] == functionButtons[3]) {
-                    // divButton
+                    // **divButton */
                     num1 = Integer.parseInt(textFieldInput.getText());
                     operator = '/';
                     textFieldInput.setText("");
-                    // textFieldInput.setText(textFieldInput.getText().concat(String.valueOf(operator)));
                 }
                 if (functionButtons[init] == functionButtons[4]) {
-                    // equButton
+                    // **equButton */
                     num2 = Integer.parseInt(textFieldInput.getText());
                     String number1 = String.valueOf(num1),
                             number2 = String.valueOf(num2);
 
-                    // labelFormulaLeft
-                    // labelFormulaLeft.setText(textFieldInput.getText());
-
-                    // labelFormulaRightL
+                    // **labelFormulaRightL and labelFormulaRightR */
                     switch (operator) {
                         case '+':
                             result = num1 + num2;
@@ -234,7 +226,7 @@ public class MyFrame extends JFrame implements MouseListener {
 
                 }
                 if (functionButtons[init] == functionButtons[5]) {
-                    // delButton
+                    // **delButton */
                     int getLength = textFieldInput.getText().length();
                     stringBuilder = new StringBuilder(textFieldInput.getText());
                     stringBuilder.deleteCharAt(getLength - 1);
@@ -242,11 +234,11 @@ public class MyFrame extends JFrame implements MouseListener {
                     textFieldInput.setText(result);
                 }
                 if (functionButtons[init] == functionButtons[6]) {
-                    // clrButton
+                    // **clrButton */
                     textFieldInput.setText("");
                 }
                 if (functionButtons[init] == functionButtons[7]) {
-                    // expoButton
+                    // **expoButton */
                     num1 = Integer.parseInt(textFieldInput.getText());
                     operator = '^';
                     textFieldInput.setText("");
@@ -255,6 +247,7 @@ public class MyFrame extends JFrame implements MouseListener {
         }
     }
 
+    // **I can't delete another event because it will generate n error */
     @Override
     public void mousePressed(MouseEvent e) {
         // TODO Auto-generated method stub
