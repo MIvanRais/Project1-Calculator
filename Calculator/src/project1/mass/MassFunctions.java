@@ -11,7 +11,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import java.awt.Font;
 
-public class MyFrame extends JFrame implements ActionListener {
+public class MassFunctions extends JFrame implements ActionListener {
     // **Declare in MyFrame scope */
     JTextField textFieldInput, textFieldResult;
     JComboBox comboBoxLength, comboBoxLengthIn, comboBoxLengthOut;
@@ -23,7 +23,7 @@ public class MyFrame extends JFrame implements ActionListener {
     String[] option = { "Standard", "Temperature", "Mass", "Length" };
     String[] optionLength = { "Kg", "Ons", "Dag", "g", "Dg", "Cg", "Mg" };
 
-    MyFrame() {
+    MassFunctions() {
         // **Create a frame */
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new GridLayout(3, 0, 0, 0));
