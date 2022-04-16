@@ -16,16 +16,16 @@ import java.awt.Font;
 public class MassFunctions extends JFrame implements ActionListener {
     // **Declare in MyFrame scope */
     JTextField textFieldInput, textFieldResult;
-    JComboBox comboBoxLength, comboBoxLengthIn, comboBoxLengthOut;
+    JComboBox comboBox, comboBoxLengthIn, comboBoxLengthOut;
     JLabel labelEqual, labelFormulaLogo, labelFormula;
 
-    String inputValue, getSelectedItemOut;
+    String inputValue, getSelectedItemOut, getSelectedItemComboBox;
     Integer result;
 
-    String[] option = { "Standard", "Temperature", "Mass", "Length" };
+    String[] option = { "Calculator", "Temperature", "Mass", "Length" };
     String[] optionLength = { "Kg", "Ons", "Dag", "g", "Dg", "Cg", "Mg" };
 
-    MassFunctions() {
+    public MassFunctions() {
         // **Create a frame */
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new GridLayout(3, 0, 0, 0));
@@ -43,12 +43,14 @@ public class MassFunctions extends JFrame implements ActionListener {
         panelNorth.setLayout(null);
 
         // **Create the comboBoxTemp */
-        comboBoxLength = new JComboBox(option);
-        comboBoxLength.setBounds(73, 23, 300, 20);
-        comboBoxLength.setFocusable(false);
+        comboBox = new JComboBox(option);
+        comboBox.setBounds(73, 23, 300, 20);
+        comboBox.setFocusable(false);
+        comboBox.addActionListener(this);
+        comboBox.removeItem("Mass");
 
         // **Add components to the panelNorth */
-        panelNorth.add(comboBoxLength);
+        panelNorth.add(comboBox);
 
         // **Create the panelCenter */
         panelCenter.setBackground(new Color(238, 238, 238));
@@ -311,8 +313,8 @@ public class MassFunctions extends JFrame implements ActionListener {
                         labelFormula.setText(textFieldInput.getText() + " / 1000 = " + String.valueOf(result));
                         labelFormula.setVisible(true);
                         break;
-                    case "Hg":
-                        // **g to Hg */
+                    case "Ons":
+                        // **g to Ons */
                         result = Integer.parseInt(textFieldInput.getText()) / ((int) Math.round(Math.pow(10, 2)));
                         textFieldResult.setText(String.valueOf(result));
                         labelFormulaLogo.setVisible(true);
@@ -368,8 +370,8 @@ public class MassFunctions extends JFrame implements ActionListener {
                         labelFormula.setText(textFieldInput.getText() + " / 10000 = " + String.valueOf(result));
                         labelFormula.setVisible(true);
                         break;
-                    case "Hg":
-                        // **Dg to Hg */
+                    case "Ons":
+                        // **Dg to Ons */
                         result = Integer.parseInt(textFieldInput.getText()) / ((int) Math.round(Math.pow(10, 3)));
                         textFieldResult.setText(String.valueOf(result));
                         labelFormulaLogo.setVisible(true);
@@ -425,8 +427,8 @@ public class MassFunctions extends JFrame implements ActionListener {
                         labelFormula.setText(textFieldInput.getText() + " / 100000 = " + String.valueOf(result));
                         labelFormula.setVisible(true);
                         break;
-                    case "Hg":
-                        // **Cg to Hg */
+                    case "Ons":
+                        // **Cg to Ons */
                         result = Integer.parseInt(textFieldInput.getText()) / ((int) Math.round(Math.pow(10, 4)));
                         textFieldResult.setText(String.valueOf(result));
                         labelFormulaLogo.setVisible(true);
@@ -482,8 +484,8 @@ public class MassFunctions extends JFrame implements ActionListener {
                         labelFormula.setText(textFieldInput.getText() + " / 1000000 = " + String.valueOf(result));
                         labelFormula.setVisible(true);
                         break;
-                    case "Hg":
-                        // **Mg to Hg */
+                    case "Ons":
+                        // **Mg to Ons */
                         result = Integer.parseInt(textFieldInput.getText()) / ((int) Math.round(Math.pow(10, 5)));
                         textFieldResult.setText(String.valueOf(result));
                         labelFormulaLogo.setVisible(true);
@@ -529,6 +531,24 @@ public class MassFunctions extends JFrame implements ActionListener {
                         labelFormula.setText(textFieldInput.getText());
                         labelFormula.setVisible(true);
                 }
+            }
+        }
+        if (e.getSource() == comboBox) {
+            // **When we click comboBox, a window will open */
+            getSelectedItemComboBox = String.valueOf(comboBox.getSelectedItem());
+            switch (getSelectedItemComboBox) {
+                case "Calculator":
+                    this.dispose(); // **it's going to close the frame */
+                    new BasiCalculatorFunctions();
+                    break;
+                case "Temperature":
+                    this.dispose(); // **it's going to close the frame */
+                    new TemperatureFunctions();
+                    break;
+                default:
+                    this.dispose(); // **it's going to close the frame */
+                    new LengthFunctions();
+
             }
         }
     }

@@ -16,16 +16,16 @@ import java.awt.Font;
 public class TemperatureFunctions extends JFrame implements ActionListener {
     // **Declare in MyFrame scope */
     JTextField textFieldInput, textFieldResult;
-    JComboBox comboBoxTemp, comboBoxTempIn, comboBoxTempOut;
+    JComboBox comboBox, comboBoxTempIn, comboBoxTempOut;
     JLabel labelEqual, labelFormulaLogo, labelFormula;
-    String inputValue;
+    String inputValue, getSelectedItemComboBox;
     Integer result;
 
-    String[] option = { "Standard", "Temperature", "Mass", "Length" };
+    String[] option = { "Calculator", "Temperature", "Mass", "Length" };
     String[] optionTemp = { "Celcius", "Fahrenheit", "Kelvin" };
 
     // **Constructor of MyFrame */
-    TemperatureFunctions() {
+    public TemperatureFunctions() {
         // **Create a frame */
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new GridLayout(3, 0, 0, 0));
@@ -43,12 +43,14 @@ public class TemperatureFunctions extends JFrame implements ActionListener {
         panelNorth.setLayout(null);
 
         // **Create the comboBoxTemp */
-        comboBoxTemp = new JComboBox(option);
-        comboBoxTemp.setBounds(73, 23, 300, 20);
-        comboBoxTemp.setFocusable(false);
+        comboBox = new JComboBox(option);
+        comboBox.setBounds(73, 23, 300, 20);
+        comboBox.setFocusable(false);
+        comboBox.removeItem("Temperature");
+        comboBox.addActionListener(this);
 
         // **Add components to the panelNorth */
-        panelNorth.add(comboBoxTemp);
+        panelNorth.add(comboBox);
 
         // **Create the panelCenter */
         panelCenter.setBackground(new Color(238, 238, 238));
@@ -114,11 +116,11 @@ public class TemperatureFunctions extends JFrame implements ActionListener {
         labelFormula.setBounds(130, 30, 260, 20);
         labelFormula.setVisible(false);
 
-        //**Add components to the panelSouth */ 
+        // **Add components to the panelSouth */
         panelSouth.add(labelFormulaLogo);
         panelSouth.add(labelFormula);
 
-        //**Add components to the frame */ 
+        // **Add components to the frame */
         this.add(panelNorth);
         this.add(panelCenter);
         this.add(panelSouth);
@@ -128,112 +130,130 @@ public class TemperatureFunctions extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == textFieldInput) {
-             //**When the textFieldInput we hit Enter, what will happen?  */
+            // **When the textFieldInput we hit Enter, what will happen? */
             if (comboBoxTempIn.getSelectedItem() == "Celcius" && comboBoxTempOut.getSelectedItem() == "Fahrenheit") {
-                //**Celcius to Fahrenheit */
+                // **Celcius to Fahrenheit */
                 inputValue = textFieldInput.getText();
                 result = (Integer.parseInt(inputValue) * 9 / 5) + 32;
                 textFieldResult.setText(Integer.toString(result));
                 textFieldResult.setEditable(false);
 
-                //**Create labelFormula and labelFormulaLogo */
+                // **Create labelFormula and labelFormulaLogo */
                 labelFormula.setText("(" + inputValue + "°C x 9/5) + 32 = " + result + " °F");
                 labelFormulaLogo.setVisible(true);
                 labelFormula.setVisible(true);
             } else if (comboBoxTempIn.getSelectedItem() == "Celcius" && comboBoxTempOut.getSelectedItem() == "Kelvin") {
-                //**Celcius to Kelvin */
+                // **Celcius to Kelvin */
                 inputValue = textFieldInput.getText();
                 result = (Integer.parseInt(inputValue) + 273);
                 textFieldResult.setText(Integer.toString(result));
                 textFieldResult.setEditable(false);
 
-                //**Create labelFormula and labelFormulaLogo */
+                // **Create labelFormula and labelFormulaLogo */
                 labelFormula.setText(inputValue + "°C + 273 = " + result + " °K");
                 labelFormulaLogo.setVisible(true);
                 labelFormula.setVisible(true);
             } else if (comboBoxTempIn.getSelectedItem() == "Celcius"
                     && comboBoxTempOut.getSelectedItem() == "Celcius") {
-                //**Celcius to Celcius */
+                // **Celcius to Celcius */
                 inputValue = textFieldInput.getText();
                 result = Integer.parseInt(inputValue);
                 textFieldResult.setText(Integer.toString(result));
                 textFieldResult.setEditable(false);
 
-                //**Create labelFormula and labelFormulaLogo */
+                // **Create labelFormula and labelFormulaLogo */
                 labelFormula.setText(result + " °C");
                 labelFormulaLogo.setVisible(true);
                 labelFormula.setVisible(true);
             } else if (comboBoxTempIn.getSelectedItem() == "Fahrenheit"
                     && comboBoxTempOut.getSelectedItem() == "Celcius") {
-                //**Fahrenheit to Celcius */
+                // **Fahrenheit to Celcius */
                 inputValue = textFieldInput.getText();
                 result = (Integer.parseInt(inputValue) - 32) * 5 / 9;
                 textFieldResult.setText(Integer.toString(result));
                 textFieldResult.setEditable(false);
 
-                //**create labelFormula and labelFormulaLogo */
+                // **create labelFormula and labelFormulaLogo */
                 labelFormula.setText("(" + inputValue + "°F - 32) x 5/9 = " + result + " °C");
                 labelFormulaLogo.setVisible(true);
                 labelFormula.setVisible(true);
             } else if (comboBoxTempIn.getSelectedItem() == "Fahrenheit"
                     && comboBoxTempOut.getSelectedItem() == "Kelvin") {
-                //**Fahrenheit to Kelvin */
+                // **Fahrenheit to Kelvin */
                 inputValue = textFieldInput.getText();
                 result = (Integer.parseInt(inputValue) - 32) * 5 / 9 + 273;
                 textFieldResult.setText(Integer.toString(result));
                 textFieldResult.setEditable(false);
 
-                //**Create labelFormula and labelFormulaLogo */
+                // **Create labelFormula and labelFormulaLogo */
                 labelFormula.setText("(" + inputValue + "°F - 32) x 5/9 + 273 = " + result + " °K");
                 labelFormulaLogo.setVisible(true);
                 labelFormula.setVisible(true);
             } else if (comboBoxTempIn.getSelectedItem() == "Fahrenheit"
                     && comboBoxTempOut.getSelectedItem() == "Fahrenheit") {
-                //**Fahrenheit to Fahrenheit */
+                // **Fahrenheit to Fahrenheit */
                 inputValue = textFieldInput.getText();
                 result = Integer.parseInt(inputValue);
                 textFieldResult.setText(Integer.toString(result));
                 textFieldResult.setEditable(false);
 
-                //**Create labelFormula and labelFormulaLogo */
+                // **Create labelFormula and labelFormulaLogo */
                 labelFormula.setText(inputValue + "°F");
                 labelFormulaLogo.setVisible(true);
                 labelFormula.setVisible(true);
             } else if (comboBoxTempIn.getSelectedItem() == "Kelvin" && comboBoxTempOut.getSelectedItem() == "Celcius") {
-                //**Kelvin to Celcius */
+                // **Kelvin to Celcius */
                 inputValue = textFieldInput.getText();
                 result = Integer.parseInt(inputValue) - 273;
                 textFieldResult.setText(Integer.toString(result));
                 textFieldResult.setEditable(false);
 
-                //**Create labelFormula and labelFormulaLogo */ 
+                // **Create labelFormula and labelFormulaLogo */
                 labelFormula.setText("(" + inputValue + "°K - 273) = " + result + " °C");
                 labelFormulaLogo.setVisible(true);
                 labelFormula.setVisible(true);
             } else if (comboBoxTempIn.getSelectedItem() == "Kelvin"
                     && comboBoxTempOut.getSelectedItem() == "Fahrenheit") {
-                //**Kelvin to Fahrenheit */
+                // **Kelvin to Fahrenheit */
                 inputValue = textFieldInput.getText();
                 result = (Integer.parseInt(inputValue) - 273) * 9 / 5 + 32;
                 textFieldResult.setText(Integer.toString(result));
                 textFieldResult.setEditable(false);
 
-                //**Create labelFormula and labelFormulaLogo */
+                // **Create labelFormula and labelFormulaLogo */
                 labelFormula.setText("(" + inputValue + "°K - 273) x 9/5 + 32 = " + result + " °F");
                 labelFormulaLogo.setVisible(true);
                 labelFormula.setVisible(true);
             } else {
-                //**Kelvin to Kelvin */
+                // **Kelvin to Kelvin */
                 inputValue = textFieldInput.getText();
                 result = Integer.parseInt(inputValue);
                 textFieldResult.setText(Integer.toString(result));
                 textFieldResult.setEditable(false);
 
-                //**Create labelFormula and labelFormulaLogo */
+                // **Create labelFormula and labelFormulaLogo */
                 labelFormula.setText(inputValue + "°K");
                 labelFormulaLogo.setVisible(true);
                 labelFormula.setVisible(true);
             }
+        }
+        if (e.getSource() == comboBox) {
+            // **When we click comboBox, a window will open */
+            getSelectedItemComboBox = String.valueOf(comboBox.getSelectedItem());
+            switch (getSelectedItemComboBox) {
+                case "Calculator":
+                    this.dispose(); // **it's going to close the frame */
+                    new BasiCalculatorFunctions();
+                    break;
+                case "Mass":
+                    this.dispose(); // **it's going to close the frame */
+                    new MassFunctions();
+                    break;
+                default:
+                    this.dispose(); // **it's going to close the frame */
+                    new LengthFunctions();
+            }
+
         }
     }
 }

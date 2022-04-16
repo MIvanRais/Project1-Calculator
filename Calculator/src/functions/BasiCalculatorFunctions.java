@@ -9,12 +9,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Font;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.GridLayout;
 import java.lang.StringBuilder;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class BasiCalculatorFunctions extends JFrame implements MouseListener {
+public class BasiCalculatorFunctions extends JFrame implements ActionListener {
     // **Declare in MyFrame scope */
     char operator;
     String value;
@@ -22,6 +22,7 @@ public class BasiCalculatorFunctions extends JFrame implements MouseListener {
 
     JComboBox comboBox;
     JTextField textFieldInput;
+    String getSelectedItemComboBox;
     JPanel panelSouth;
     JButton addButton, subButton, mulButton, divButton, expoButton, equButton, delButton, clrButton;
     JLabel labelFormulaLeft, labelFormulaRightL, labelFormulaRightR;
@@ -29,12 +30,12 @@ public class BasiCalculatorFunctions extends JFrame implements MouseListener {
 
     JButton[] numberButtons = new JButton[10];
     JButton[] functionButtons = new JButton[8];
-    String[] option = { "Standard", "Temperature", "Mass", "Length" };
+    String[] option = { "Calculator", "Temperature", "Mass", "Length" };
 
     Font myFont = new Font(null, Font.PLAIN, 18);
 
     // **Constructor of MyFrame */
-    BasiCalculatorFunctions() {
+    public BasiCalculatorFunctions() {
         // **Create a frame */
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Standard");
@@ -46,6 +47,8 @@ public class BasiCalculatorFunctions extends JFrame implements MouseListener {
         comboBox = new JComboBox(option);
         comboBox.setBounds(25, 20, 300, 20);
         comboBox.setFocusable(false);
+        comboBox.removeItem("Calculator");
+        comboBox.addActionListener(this);
 
         // **Create the labelFormulaLeft */
         labelFormulaLeft = new JLabel();
@@ -96,7 +99,7 @@ public class BasiCalculatorFunctions extends JFrame implements MouseListener {
         functionButtons[7] = expoButton;
 
         for (int init = 0; init < 8; init++) {
-            functionButtons[init].addMouseListener(this);
+            functionButtons[init].addActionListener(this);
             functionButtons[init].setFont(myFont);
             functionButtons[init].setFocusable(false);
         }
@@ -104,7 +107,7 @@ public class BasiCalculatorFunctions extends JFrame implements MouseListener {
         // **Create a numberButtons */
         for (int init = 0; init < 10; init++) {
             numberButtons[init] = new JButton(String.valueOf(init));
-            numberButtons[init].addMouseListener(this);
+            numberButtons[init].addActionListener(this);
             numberButtons[init].setFocusable(false);
             numberButtons[init].setFont(myFont);
         }
@@ -143,9 +146,9 @@ public class BasiCalculatorFunctions extends JFrame implements MouseListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void actionPerformed(ActionEvent e) {
         // **Invoked when the mouse button has been clicked (pressed and released) on a
-        // component */
+        // ** component */
         for (int init = 0; init < 10; init++) {
             if (e.getSource() == numberButtons[init]) {
 
@@ -245,30 +248,23 @@ public class BasiCalculatorFunctions extends JFrame implements MouseListener {
                 }
             }
         }
-    }
-
-    // **I can't delete another event because it will generate n error */
-    @Override
-    public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
+        if (e.getSource() == comboBox) {
+            // **When we click comboBox, a window will open */
+            getSelectedItemComboBox = String.valueOf(comboBox.getSelectedItem());
+            switch (getSelectedItemComboBox) {
+                case "Length":
+                    this.dispose(); // **it's going to close the frame */
+                    new LengthFunctions();
+                    break;
+                case "Mass":
+                    this.dispose(); // **it's going to close the frame */
+                    new MassFunctions();
+                    break;
+                default:
+                    this.dispose(); // **it's going to close the frame */
+                    new TemperatureFunctions();
+            }
+        }
 
     }
 
