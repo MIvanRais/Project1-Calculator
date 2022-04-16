@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Font;
 
-public class MyFrame extends JFrame implements ActionListener {
+public class TemperatureFunctions extends JFrame implements ActionListener {
     // **Declare in MyFrame scope */
     JTextField textFieldInput, textFieldResult;
     JComboBox comboBoxTemp, comboBoxTempIn, comboBoxTempOut;
@@ -25,7 +25,7 @@ public class MyFrame extends JFrame implements ActionListener {
     String[] optionTemp = { "Celcius", "Fahrenheit", "Kelvin" };
 
     // **Constructor of MyFrame */
-    MyFrame() {
+    TemperatureFunctions() {
         // **Create a frame */
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new GridLayout(3, 0, 0, 0));
