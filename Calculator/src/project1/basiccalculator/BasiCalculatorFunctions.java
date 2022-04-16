@@ -14,7 +14,7 @@ import java.awt.event.MouseListener;
 import java.awt.GridLayout;
 import java.lang.StringBuilder;
 
-public class MyFrame extends JFrame implements MouseListener {
+public class BasiCalculatorFunctions extends JFrame implements MouseListener {
     // **Declare in MyFrame scope */
     char operator;
     String value;
@@ -34,7 +34,7 @@ public class MyFrame extends JFrame implements MouseListener {
     Font myFont = new Font(null, Font.PLAIN, 18);
 
     // **Constructor of MyFrame */
-    MyFrame() {
+    BasiCalculatorFunctions() {
         // **Create a frame */
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Standard");
