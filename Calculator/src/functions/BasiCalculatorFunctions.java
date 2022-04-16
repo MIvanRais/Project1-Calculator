@@ -1,5 +1,5 @@
-//**The file in project1.basiccalculator package */
-package project1.basiccalculator;
+//**The file in functions package */
+package functions;
 
 //**Import from library Java */
 import javax.swing.JButton;
@@ -29,7 +29,7 @@ public class BasiCalculatorFunctions extends JFrame implements MouseListener {
 
     JButton[] numberButtons = new JButton[10];
     JButton[] functionButtons = new JButton[8];
-    String[] option = { "Standard", "Temperature", "Scientific", "Programmer" };
+    String[] option = { "Standard", "Temperature", "Mass", "Length" };
 
     Font myFont = new Font(null, Font.PLAIN, 18);
 

@@ -1,5 +1,5 @@
 //**The file in project1.temperature package */
-package project1.temperature;
+package functions;
 
 //**Import from library Java */
 import javax.swing.JComboBox;
@@ -21,7 +21,7 @@ public class TemperatureFunctions extends JFrame implements ActionListener {
     String inputValue;
     Integer result;
 
-    String[] option = { "Standard", "Temperature", "Scientific", "Programmer" };
+    String[] option = { "Standard", "Temperature", "Mass", "Length" };
     String[] optionTemp = { "Celcius", "Fahrenheit", "Kelvin" };
 
     // **Constructor of MyFrame */

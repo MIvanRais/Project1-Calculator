@@ -1,5 +1,7 @@
-package project1.length;
+//**The file in functions package */
+package functions;
 
+//**Import from library Java */
 import javax.swing.JFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
